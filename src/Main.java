@@ -101,6 +101,7 @@ public class Main {
             // Aktualizacja odległości do sąsiednich wierzchołków
             OneWayLinkedListWithHead<City> roadsList = graph.get(minIndex);   // Lista sąsiedztwa odwiedzanego miasta, ma wszystkie drogi do innych miast
             for (City city : roadsList) {
+                if (city.roadLength == Integer.MAX_VALUE) continue; // Pomijam miasta do których nie ma połączenia (nieskończoność)
                 // Rozpatruje odległości wszystkich dróg wychodzących z odwiedzanego miasta
                 if (!visited[city.nextCityID]) {    // Jeżeli nie odwiedziłem jeszcze kolejnego miasta to rozpatruję nową drogę do niego
                     int newDistance = distances[minIndex] + city.roadLength;    // Odległość do miasta w którym jestem + długość drogi do kolejnego miasta
@@ -119,7 +120,7 @@ public class Main {
                 System.out.println("Miasto startowe to " + graph.get(i).get(0).name());
             }
             else if (distances[i] == Integer.MAX_VALUE) {
-                System.out.println("Brak drogi z miasta startowego do Miasta nr. " + i); // ach te polskie drogi, jednokierunkowa pomiędzy miastami :)
+                System.out.println("Brak drogi z miasta startowego do Miasta " + graph.get(i).get(0).name()); // ach te polskie drogi, jednokierunkowa pomiędzy miastami :)
             } else {
                 System.out.println(graph.get(i).get(0).name() + ", odległość od miasta startowego: " + distances[i]);
             }

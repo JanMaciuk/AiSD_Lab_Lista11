@@ -1,6 +1,6 @@
 public class City {
     protected int ID;
-    protected int roadLength;
+    protected int roadLength = Integer.MAX_VALUE;
     public int nextCityID;
 
 
